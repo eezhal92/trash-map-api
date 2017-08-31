@@ -1,0 +1,46 @@
+{
+  "scripts": {
+    "dev": "NODE_ENV=development NODE_PATH=. nodemon --exec \"npm run lint && node index.js\"",
+    "lint": "eslint src tests",
+    "test": "NODE_PATH=. jest --verbose"
+  },
+  "dependencies": {
+    "body-parser": "^1.17.2",
+    "cors": "^2.8.4",
+    "dotenv": "^4.0.0",
+    "es6-error": "^4.0.2",
+    "express": "^4.15.4",
+    "http-status": "^1.0.1",
+    "method-override": "^2.3.9",
+    "mongoose": "^4.11.9",
+    "multer": "^1.3.0",
+    "shelljs": "^0.7.8",
+    "validatorjs": "^3.13.5"
+  },
+  "devDependencies": {
+    "babel-core": "^6.26.0",
+    "babel-eslint": "^7.2.3",
+    "babel-jest": "^20.0.3",
+    "babel-plugin-transform-async-to-generator": "^6.24.1",
+    "babel-plugin-transform-class-properties": "^6.24.1",
+    "babel-plugin-transform-object-rest-spread": "^6.26.0",
+    "babel-polyfill": "^6.26.0",
+    "babel-preset-es2015": "^6.24.1",
+    "babel-register": "^6.26.0",
+    "eslint": "^4.5.0",
+    "eslint-config-standard": "^10.2.1",
+    "eslint-plugin-import": "^2.7.0",
+    "eslint-plugin-node": "^5.1.1",
+    "eslint-plugin-promise": "^3.5.0",
+    "eslint-plugin-standard": "^3.0.1",
+    "jest": "^20.0.4",
+    "nodemon": "^1.11.0",
+    "supertest": "^3.0.0"
+  },
+  "jest": {
+    "testEnvironment": "node",
+    "modulePaths": [
+      "<rootDir>/"
+    ]
+  }
+}
