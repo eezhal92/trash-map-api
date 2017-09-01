@@ -2,6 +2,12 @@ import status from 'http-status'
 import { Trash, Photo } from '../models'
 import { LocalStorage } from '../lib/storage'
 
+const index = async (req, res) => {
+  const response = await Trash.find({})
+
+  res.status(status.OK).json(response)
+}
+
 const store = async (req, res) => {
   const { file, body } = req
 
@@ -25,5 +31,6 @@ const store = async (req, res) => {
 }
 
 export default {
+  index,
   store
 }

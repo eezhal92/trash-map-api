@@ -10,6 +10,7 @@ const upload = multer({ dest: 'public/tmp/uploads/' })
 const router = express.Router()
 
 router.route('/')
+  .get(trashController.index)
   .post(
     upload.single('photo'),
     inputValidation(validations.store),

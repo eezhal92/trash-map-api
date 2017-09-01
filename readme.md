@@ -9,3 +9,8 @@
 * Install all dependecies `yarn install`
 * Copy `.env.example` into `.env` and change the env variable values
 * Run the app `yarn run dev`
+
+
+## Run for Production
+* Build the source `yarn run build`
+* Run the app `yarn run start`
