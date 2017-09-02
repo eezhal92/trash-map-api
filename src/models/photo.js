@@ -3,8 +3,7 @@ const Schema = mongoose.Schema
 
 const Photo = new Schema({
   filename: String,
-  path: String,
-  mime: String,
+  url: String,
   createdAt: { type: Date, default: Date.now },
   updatedAt: { type: Date, default: Date.now }
 })

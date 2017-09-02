@@ -1,5 +1,6 @@
 import cors from 'cors'
 import express from 'express'
+import { resolve } from 'path'
 import bodyParser from 'body-parser'
 import methodOverride from 'method-override'
 
@@ -9,6 +10,7 @@ import { errorToResponse } from './middlewares'
 
 const app = express()
 
+app.use('/public', express.static(resolve(__dirname, '../public')))
 app.use(cors())
 app.use(methodOverride())
 app.use(bodyParser.json({ limit: '250kb' }))

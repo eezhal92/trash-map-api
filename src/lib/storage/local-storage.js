@@ -1,6 +1,7 @@
 import fs from 'fs'
 import shell from 'shelljs'
 import { resolve, join } from 'path'
+import { hostname } from 'src/lib/util'
 
 const STORAGE_PATH = resolve(process.env.NODE_PATH, 'public/storage')
 
@@ -14,13 +15,17 @@ const buildTargetDirPath = (dir) => {
 
 const convertToRelativePath = (absolutePath) => absolutePath.replace(STORAGE_PATH, '')
 
+const filename = (file) => `${file.filename}-${file.originalname}`
+
 const buildTargetFilePath = (file, dir = null) => {
-  return join(buildTargetDirPath(dir), `${file.filename}-${file.originalname}`)
+  return join(buildTargetDirPath(dir), filename(file))
 }
 
 const isDirectoryExists = (dir) => fs.existsSync(dir)
 
 const makeDir = (dir) => shell.mkdir('-p', dir)
+
+const url = (relativePath) => `${hostname()}/public/storage${relativePath}`
 
 const move = async (file, dir = null) => {
   const tempFilePath = resolve(process.env.NODE_PATH, file.path)
@@ -35,7 +40,16 @@ const move = async (file, dir = null) => {
 
   await shell.exec(`mv ${tempFilePath} ${targetFilePath}`)
 
-  return convertToRelativePath(targetFilePath)
+  const relativePath = convertToRelativePath(targetFilePath)
+
+  return {
+    driver: 'local',
+    uuid: null,
+    url: url(relativePath),
+    path: relativePath,
+    filename: filename(file),
+    size: file.size
+  }
 }
 
 export default {

@@ -19,6 +19,8 @@ require('babel-polyfill')
 if (process.env.NODE_ENV === 'production') {
   require('./dist/server.bundle')
 } else {
+  process.on('unhandledRejection', r => console.log(r))
+
   require('babel-register')()
 
   require('./src/index')
