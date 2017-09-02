@@ -23,7 +23,7 @@ const store = async (req, res) => {
 
   const response = await trash.populate({ path: 'photo', select: 'url' }).execPopulate()
 
-  res.status(status.OK).json(response)
+  res.status(status.CREATED).json(response)
 }
 
 export default {

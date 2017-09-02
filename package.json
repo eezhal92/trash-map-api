@@ -14,7 +14,7 @@
     "now-build": "npm run public-dir && npm run build",
     "public-dir": "mkdir -p public/storage/photos && mkdir -p public/tmp/uploads",
     "lint": "eslint src tests",
-    "test": "NODE_PATH=. jest --verbose"
+    "test": "NODE_PATH=. jest -i --verbose"
   },
   "dependencies": {
     "axios": "^0.16.2",
