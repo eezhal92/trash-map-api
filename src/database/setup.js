@@ -28,7 +28,7 @@ export default (url, options = {}) => {
   /**
    * @return {Promise}
    */
-  const disconnect = () => new Promise((resolve, reject) => {
+  const close = () => new Promise((resolve, reject) => {
     if (!connection) {
       reject(new Error('[App] There is no mongodb connection yet'))
     }
@@ -59,7 +59,7 @@ export default (url, options = {}) => {
 
   return {
     connect,
-    disconnect,
+    close,
     clear
   }
 }
