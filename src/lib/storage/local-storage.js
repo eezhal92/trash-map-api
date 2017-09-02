@@ -43,11 +43,9 @@ const move = async (file, dir = null) => {
   const relativePath = convertToRelativePath(targetFilePath)
 
   return {
-    driver: 'local',
     uuid: null,
-    url: url(relativePath),
-    path: relativePath,
-    filename: filename(file),
+    original_file_url: url(relativePath),
+    original_filename: filename(file),
     size: file.size
   }
 }

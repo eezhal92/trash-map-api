@@ -9,11 +9,11 @@ const index = async (req, res) => {
 }
 
 const store = async (req, res) => {
-  let { file, body } = req
+  const { file, body } = req
 
-  file = await Storage.move(file, 'photos')
+  const photoFile = await Storage.move(file, 'photos')
 
-  const photo = await Photo.create({ filename: file.filename, url: file.url })
+  const photo = await Photo.create({ filename: photoFile.filename, url: photoFile.original_file_url })
 
   const trash = await Trash.create({
     latitude: body.latitude,
