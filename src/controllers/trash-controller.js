@@ -3,7 +3,7 @@ import { Trash, Photo } from '../models'
 import Storage from '../lib/storage'
 
 const index = async (req, res) => {
-  const response = await Trash.find({}).populate({ path: 'photo', select: 'url' }).exec()
+  const response = await Trash.find({}).sort({ createdAt: -1 }).populate({ path: 'photo', select: 'url' }).exec()
 
   res.status(status.OK).json(response)
 }
