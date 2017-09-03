@@ -8,7 +8,8 @@ const Trash = new Schema({
     type: Schema.Types.ObjectId,
     ref: 'Photo',
     index: true
-  }
+  },
+  createdAt: { type: Date, default: Date.now }
 })
 
 export default mongoose.model('Trash', Trash)
