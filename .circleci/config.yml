@@ -1,31 +1,54 @@
-version: 2
+version: 2.0
+
 jobs:
   build:
     docker:
       - image: circleci/node:6.11
-
       - image: circleci/mongo:3.4.4
-
-    working_directory: ~/repo
-
+    working_directory: ~/trash-map-api
     steps:
       - checkout
-
-      # Download and cache dependencies
       - restore_cache:
           keys:
           - v1-dependencies-{{ checksum "package.json" }}
-          # fallback to using the latest cache if no exact match is found
-          - v1-dependencies-
-
-      - run: yarn install
-
+      - run:
+          name: Install Dependencies
+          command: yarn install
       - save_cache:
           paths:
             - node_modules
           key: v1-dependencies-{{ checksum "package.json" }}
+      - run:
+          name: Run Tests
+          command: yarn test
 
-      # run tests!
-      - run: yarn test
+  deploy:
+    machine:
+      enabled: true
+    working_directory: ~/trash-map-api
+    environment:
+      HEROKU_APP: "trash-map-api"
+    steps:
+      - checkout
+      - run:
+          name: Setup Heroku
+          command: bash .circleci/setup-heroku.sh
+
+      - run:
+          command: |
+            git push heroku master:master
+            sleep 5 # sleep for 5 seconds to wait for dynos
+            heroku restart
+workflows:
+  version: 2
+  build-and-deploy:
+    jobs:
+      - build
+      - deploy:
+          requires:
+            - build
+          filters:
+            branches:
+              only: master
 
 
