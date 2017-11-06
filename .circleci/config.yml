@@ -3,7 +3,7 @@ version: 2.0
 jobs:
   build:
     docker:
-      - image: circleci/node:6.11
+      - image: circleci/node:8.9
       - image: circleci/mongo:3.4.4
     working_directory: ~/trash-map-api
     steps:
