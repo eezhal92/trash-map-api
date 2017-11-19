@@ -26,7 +26,18 @@ const store = async (req, res) => {
   res.status(status.CREATED).json(response)
 }
 
+const destroy = async (req, res) => {
+  const { id } = req.params
+
+  const trash = await Trash.findById(id)
+
+  await trash.remove()
+
+  res.status(200).json({ message: `Trash with ID of ${id} has been deleted` })
+}
+
 export default {
   index,
-  store
+  store,
+  destroy
 }
