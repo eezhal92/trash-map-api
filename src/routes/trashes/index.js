@@ -18,4 +18,7 @@ router.route('/')
     trashController.store
   )
 
+router.route('/:id')
+  .delete(trashController.destroy)
+
 export default router
