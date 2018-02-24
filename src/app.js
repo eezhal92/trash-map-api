@@ -1,3 +1,4 @@
+import http from 'http'
 import cors from 'cors'
 import express from 'express'
 import { resolve } from 'path'
@@ -6,6 +7,7 @@ import methodOverride from 'method-override'
 
 import routes from './routes'
 import { NotFoundError } from './errors/http'
+import { initSocketIO } from './lib/web-socket'
 import { errorToResponse } from './middlewares'
 
 const app = express()
@@ -24,4 +26,8 @@ app.use((req, res, next) => {
 })
 app.use(errorToResponse())
 
-export default app
+const server = http.Server(app)
+
+initSocketIO(server)
+
+export default server

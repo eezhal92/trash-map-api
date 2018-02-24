@@ -1,5 +1,6 @@
 import status from 'http-status'
 import { GarbageBin, GarbageBinLog } from '../models'
+import { getIO } from '../lib/web-socket'
 
 const index = async (req, res) => {
   const { id } = req.params
@@ -31,14 +32,20 @@ const store = async (req, res) => {
     })
   }
 
-  const garbageBinLog = await GarbageBinLog.create({
-    garbageBin: id,
-    elevation,
-    humidity,
-    temperature
-  })
+  // todo: only persist in 1 hour interval
 
-  res.status(status.CREATED).json(garbageBinLog)
+  const payload = {
+    tpsId: id,
+    humidity,
+    temperature,
+    elevation
+  }
+
+  const io = getIO()
+
+  io.emit('garbage-bin-log:added', payload)
+
+  res.status(status.CREATED).json(payload)
 }
 
 export default {
