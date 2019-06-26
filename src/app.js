@@ -13,7 +13,9 @@ import { errorToResponse } from './middlewares'
 const app = express()
 
 app.use('/public', express.static(resolve(__dirname, '../public')))
-app.use(cors())
+app.use(cors({
+  origin: '*'
+}))
 app.use(methodOverride())
 app.use(bodyParser.json({ limit: '250kb' }))
 app.use(bodyParser.urlencoded({ extended: true }))
