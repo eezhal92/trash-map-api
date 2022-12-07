@@ -23,7 +23,7 @@
     "cors": "^2.8.4",
     "dotenv": "^4.0.0",
     "es6-error": "^4.0.2",
-    "express": "^4.15.4",
+    "express": "^4.17.3",
     "http-status": "^1.0.1",
     "lodash": "^4.17.4",
     "method-override": "^2.3.9",
